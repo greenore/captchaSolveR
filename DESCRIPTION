@@ -1,6 +1,6 @@
-Package: captchaSolver
+Package: captchaSolveR
 Type: Package
-Title: captchaSolver: A package to solve captcha codes
+Title: captchaSolveR: A package to solve captcha codes
 Version: 0.1
 Date: 2014-02-26
 Author: Tim Hagmann <tim.hagmann@baloise.ch>
