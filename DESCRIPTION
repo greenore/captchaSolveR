@@ -3,8 +3,8 @@ Type: Package
 Title: captchaSolveR: A package to solve captcha codes
 Version: 0.1
 Date: 2014-02-26
-Author: Tim Hagmann <tim.hagmann@baloise.ch>
-Maintainer: Tim Hagmann <tim.hagmann@baloise.ch>
+Author: Tim Hagmann
+Maintainer: Tim Hagmann
 Description: A tool to facilitate captcha solving that also includes functions
     to handle data, system commands, etc.
 Depends:
