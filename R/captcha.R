@@ -14,7 +14,7 @@
 #' captcha <- img2Black(captcha)
 
 img2Black <- function(img){
-  require(biOps)
+  #require(biOps)
   
   # make dark colors dark and light colors light
   limit <- 150
@@ -22,7 +22,7 @@ img2Black <- function(img){
   img[img >= limit] <- 255
   
   # Image to grey Scale
-  img <- imgRGB2Grey(img)
+  #img <- imgRGB2Grey(img)
   
   # make dark colors dark and light colors light
   limit <- 200
@@ -80,7 +80,7 @@ isWhite <- function(img, axes = 'v'){
 #' 
 
 cutWhite <- function(letter){
-  require(biOps)
+  #require(biOps)
   
   # Length & Width
   width <- length(letter[1, ])
@@ -159,7 +159,7 @@ makeCanvas <- function(nrows, ncols){
 #' 
 
 rotLetter <- function(letter, cSize, angle, cutoff = 1/5){
-  require(biOps)
+  #require(biOps)
   require(EBImage)
   
   # Prepare canvas
@@ -217,7 +217,7 @@ sharpenImage <- function(img){
 #' 
 
 isMW <- function(letter){
-  require(biOps)
+  #require(biOps)
   
   width <- letter[1, ]
   height <- letter[, 1]
@@ -259,7 +259,7 @@ isMW <- function(letter){
 #' 
 
 rotationFun <- function(letter){
-  require(biOps)
+  #require(biOps)
   
   ## Rotate, cut horizontal and vertical whitespace / get the width
   rotation <- c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, -5, -10, -15, -20,
@@ -337,7 +337,7 @@ plotLetters <- function(letter, canvas, number, widthLetter = 30){
 #' 
 
 rotateAndCombine <- function(letter){
-  require(biOps)
+  #require(biOps)
   
   ## Rotate, cut horizontal and vertical whitespace / get the width
   rotation <- seq(-55, 55, by = 5)
