@@ -3,12 +3,12 @@
 \alias{sepLetter}
 \title{Seperate letters}
 \usage{
-sepLetter(img, nLetter)
+sepLetter(img, letter_num)
 }
 \arguments{
 \item{img}{}
 
-\item{nLetter}{}
+\item{letter_num}{}
 }
 \description{
 \code{sepLetter}

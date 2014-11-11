@@ -118,10 +118,10 @@ cutWhite <- function(letter){
 #' @description \code{sepLetter} 
 #'  
 #' @param img
-#' @param nLetter
+#' @param letter_num
 #' 
 
-sepLetter <- function(img, nLetter){
+sepLetter <- function(img, letter_num){
   require(EBImage)
   
   # Get image data
@@ -141,7 +141,7 @@ sepLetter <- function(img, nLetter){
   xRight <- rleVerti$cumsum[rleVerti$values == T] + 1
   
   # Cut letter
-  letter <- img_data[, xLeft[nLetter]:xRight[nLetter]]
+  letter <- img_data[, xLeft[letter_num]:xRight[letter_num]]
   letter <- cutWhite(letter)
   
   # Change direction
