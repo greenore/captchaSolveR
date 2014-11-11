@@ -178,6 +178,7 @@ makeCanvas <- function(nrows, ncols){
 rotLetter <- function(letter, canvas_size, angle, cutoff=1/5){
   require(EBImage)
   
+  image.data <- imageData(letter)
   # Prepare canvas
   canvas <- makeCanvas(nrows=canvas_size, ncols=canvas_size)
   
@@ -190,16 +191,12 @@ rotLetter <- function(letter, canvas_size, angle, cutoff=1/5){
   zero_y <- canvas_size/2 - center_y
   
   # Max. width and max. height of the letter
-  width_x <- length(letter[, 1])
-  height_y <- length(letter[1, ])
+  width_x <- length(letter[, 1]) - 1
+  height_y <- length(letter[1, ]) - 1
   
   # Plot the letter on the canvas
-  for(y in 1:height_y){
-    for(x in 1:width_x){
-      canvas[zero_x + (x - 1), zero_y + (y - 1)] <- letter[x, y]
-    }
-  }
-  
+  canvas[zero_x:(zero_x + width_x), zero_y:(zero_y + height_y)] <- image.data
+    
   # Rotate the canvas
   canvas.r <- rotate(canvas, angle=angle)
   
@@ -325,6 +322,7 @@ plotLetters <- function(letter, canvas, number, letter_width=30){
       canvas[zeroy + (y - 1), zerox + (x - 1)] <- img.data[y, x]
     }
   }
+  
   canvas
 }
 
