@@ -3,7 +3,7 @@
 \alias{rotateAndCombine}
 \title{Rotate Letter randomly}
 \usage{
-rotateAndCombine(letter)
+rotateAndCombine(letter, angle, nrows = 70, ncols = 800)
 }
 \arguments{
 \item{letter}{}

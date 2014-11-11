@@ -335,18 +335,15 @@ plotLetters <- function(letter, canvas, number, letter_width=30){
 #' @param letter
 #' 
 
-rotateAndCombine <- function(letter){
+rotateAndCombine <- function(letter, angle, nrows=70, ncols=800){
   require(EBImage)
   
-  ## Rotate, cut horizontal and vertical whitespace / get the width
-  rotation <- seq(-55, 55, by=5)
-  
   # Prepare canvas
-  canvas <- makeCanvas(nrows=70, ncols=800)
+  canvas <- makeCanvas(nrows=nrows, ncols=ncols)
   
   # Rotate the letter
-  for(i in 1:length(rotation)){
-    canvas <- plotLetters(cutWhite(rotLetter(letter, cSize=100, angle=rotation[i], cutoff=1/5)), canvas, number=i)
+  for(i in 1:length(angle)){
+    canvas <- plotLetters(cutWhite(rotLetter(letter, canvas_size=100, angle=angle[i], cutoff=1/5)), canvas, number=i)
   }
   
   canvas
