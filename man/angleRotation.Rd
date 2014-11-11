@@ -7,6 +7,8 @@ angleRotation(letter, angle)
 }
 \arguments{
 \item{letter}{}
+
+\item{angle}{}
 }
 \description{
 \code{angleRotation} rotates a letter according to it's width, i.e.,

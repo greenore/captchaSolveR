@@ -160,7 +160,7 @@ sepLetter <- function(img, letter_num){
 #' 
 
 makeCanvas <- function(nrows, ncols){
-  canvas <- transpose(matrix(data=rep(1, nrows * ncols), nrow=nrows, ncol=ncols))
+  canvas <- matrix(data=rep(1, nrows * ncols), nrow=nrows, ncol=ncols)
   canvas
 }
 
@@ -258,6 +258,7 @@ isMW <- function(letter){
 #' it minimizes or maximizes it (for the letters M & W). 
 #' 
 #' @param letter
+#' @param angle
 #' 
 
 ## Rotate, cut horizontal and vertical whitespace / get the width
@@ -308,10 +309,11 @@ angleRotation <- function(letter, angle){
 #' 
 
 plotLetters <- function(letter, canvas, number, letter_width=30){
+  img.data <- transpose(imageData(letter))
   
   # Max. width and max. height of the letter
-  widthx <- length(letter[, 1])
-  heighty <- length(letter[1, ])
+  heighty <- length(img.data[, 1])
+  widthx <- length(img.data[1, ])
   
   # Zero coordinates of the canvas c(Y, X)
   zeroy <- length(canvas[, 1])/2
@@ -320,10 +322,9 @@ plotLetters <- function(letter, canvas, number, letter_width=30){
   # Plot the letter on the canvas
   for(y in 1:heighty){
     for(x in 1:widthx){
-      canvas[zeroy + (x - 1), zerox + (y - 1)] <- letter[x, y]
+      canvas[zeroy + (y - 1), zerox + (x - 1)] <- img.data[y, x]
     }
-  } 
-  
+  }
   canvas
 }
 
@@ -333,9 +334,12 @@ plotLetters <- function(letter, canvas, number, letter_width=30){
 #' @description \code{rotateAndCombine} 
 #'  
 #' @param letter
+#' @param angle
+#' @param nrows
+#' @param ncols
 #' 
 
-rotateAndCombine <- function(letter, angle, nrows=70, ncols=800){
+rotateAndCombine <- function(letter, angle, nrows=80, ncols=800){
   require(EBImage)
   
   # Prepare canvas
@@ -346,5 +350,7 @@ rotateAndCombine <- function(letter, angle, nrows=70, ncols=800){
     canvas <- plotLetters(cutWhite(rotLetter(letter, canvas_size=100, angle=angle[i], cutoff=1/5)), canvas, number=i)
   }
   
+  canvas <- transpose(canvas)
+  canvas <- cutWhite(canvas)
   canvas
 }
