@@ -13,9 +13,9 @@ horizontally.}
 }
 \description{
 \code{isWhite} is looking for the parts in an image that are
-white (rgb = 255) and returns a logical vector (T or F).
+white (rgb=255) and returns a logical vector (T or F).
 }
 \examples{
-whiteVector <- isWhite(letter, axes = 'h')
+whiteVector <- isWhite(letter, axes='h')
 }
 

@@ -3,12 +3,12 @@
 \alias{rotLetter}
 \title{Rotate a letter}
 \usage{
-rotLetter(letter, cSize, angle, cutoff = 1/5)
+rotLetter(letter, canvas_size, angle, cutoff = 1/5)
 }
 \arguments{
 \item{letter}{}
 
-\item{cSize}{}
+\item{canvas_size}{}
 
 \item{angle}{}
 
