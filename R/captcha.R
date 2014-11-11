@@ -20,16 +20,16 @@ img2Grey <- function(img){
   img
 }
 
-#' @title make dark colors dark and light colors light
+#' @title Makes dark colors black and light colors white, i.e. sharpens the colors
 #' @export
 #' 
-#' @description \code{blackOrWhite} transforms a multilayered and multicolored 
+#' @description \code{sharpenImg} transforms a multilayered and multicolored 
 #' Image into a Greyscale image. 
 #'  
 #' @param img An image resulting from a readImage import.
 #' @param limit The color limit value [0, 1], where 0 is black and 1 is white. 
 
-blackOrWhite <- function(img, limit){
+sharpenImg <- function(img, limit){
   require(EBImage)
   
   # Get image data
@@ -160,7 +160,7 @@ sepLetter <- function(img, nLetter){
 #' 
 
 makeCanvas <- function(nrows, ncols){
-  canvas <- imagedata(matrix(data = rep(255, nrows * ncols), nrow = nrows, ncol = ncols))
+  canvas <- transpose(matrix(data = rep(255, nrows * ncols), nrow = nrows, ncol = ncols))
   canvas
 }
 
@@ -176,7 +176,6 @@ makeCanvas <- function(nrows, ncols){
 #' 
 
 rotLetter <- function(letter, cSize, angle, cutoff = 1/5){
-  #require(biOps)
   require(EBImage)
   
   # Prepare canvas
@@ -209,20 +208,6 @@ rotLetter <- function(letter, cSize, angle, cutoff = 1/5){
                      (cutoff * cSize):((1 - cutoff) * cSize)]
   
   imagedata(rCanvas)  
-}
-
-#' @title Sharpen an image to max
-#' @export
-#' 
-#' @description \code{sharpenImage} 
-#'  
-#' @param img
-#' 
-
-sharpenImage <- function(img){
-  img[img > 255/2] <- 255
-  img[img < 255/2] <- 0
-  img
 }
 
 #' @title Is a letter a M or W
