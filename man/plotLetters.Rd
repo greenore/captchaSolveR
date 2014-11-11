@@ -3,7 +3,7 @@
 \alias{plotLetters}
 \title{Plot Letter on a canvas}
 \usage{
-plotLetters(letter, canvas, number, widthLetter = 30)
+plotLetters(letter, canvas, number, letter_width = 30)
 }
 \arguments{
 \item{letter}{}
@@ -12,7 +12,7 @@ plotLetters(letter, canvas, number, widthLetter = 30)
 
 \item{number}{}
 
-\item{widthLetter}{}
+\item{letter_width}{}
 }
 \description{
 \code{plotLetters}

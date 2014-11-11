@@ -219,24 +219,24 @@ rotLetter <- function(letter, canvas_size, angle, cutoff=1/5){
 #' 
 
 isMW <- function(letter){
-  #require(biOps)
+  require(EBImage)
   
   width <- letter[1, ]
   height <- letter[, 1]
   
-  nPixel <- round(length(width) * 2/5)
-  nPixel2 <- round(length(width) * 1/15)
+  npixel <- round(length(width) * 2/5)
+  npixel2 <- round(length(width) * 1/15)
   
-  xLeft <- letter[, (1 + nPixel2):nPixel]
-  xRight <- letter[, (length(letter[1, ]) - nPixel):(length(letter[1, ]) - nPixel2)]
+  xleft <- letter[, (1 + npixel2):npixel]
+  xright <- letter[, (length(letter[1, ]) - npixel):(length(letter[1, ]) - npixel2)]
   
-  xLeft <- isWhite(sharpenImage(xLeft), axes='h')
-  xRight <- isWhite(sharpenImage(xRight), axes='h')
+  xleft <- isWhite(sharpenImage(xleft, limit=0.5), axes='h')
+  xright <- isWhite(sharpenImage(xright, limit=0.5), axes='h')
   
-  rleLeft <- rle(xLeft)
-  rleRight <- rle(xRight)
+  rleLeft <- rle(xleft)
+  rleRight <- rle(xright)
   
-  x <- NULL  
+  x <- NULL
   if(length(rleLeft$values) == 7){
     if(sum(rleLeft$values == c(F, T, F, T, F, T, F)) == 7){
       x[1] <- T
@@ -251,52 +251,49 @@ isMW <- function(letter){
   sum(x, na.rm=T) > 0
 }
 
-#' @title Rotate a letter
+#' @title Rotate a letter according to a set of angle.
 #' @export
 #' 
-#' @description \code{rotationFun} rotates a letter according to it's width, i.e.,
+#' @description \code{angleRotation} rotates a letter according to it's width, i.e.,
 #' it minimizes or maximizes it (for the letters M & W). 
 #' 
 #' @param letter
 #' 
 
-rotationFun <- function(letter){
-  #require(biOps)
+## Rotate, cut horizontal and vertical whitespace / get the width
+angleRotation <- function(letter, angle){
+  require(EBImage)
   
-  ## Rotate, cut horizontal and vertical whitespace / get the width
-  rotation <- c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, -5, -10, -15, -20,
-                -25, -30, -35, -40, -45, -50)
-  #   rotation <- c(0, 22.5, 45, 67.5, 90, -22.5, -45, -67.5, -90)
-  df <- data.frame(rotation)
-  
-  for(i in 1:length(rotation)){
-    df$width[i] <- length(cutWhite(rotLetter(letter, cSize=100, angle=rotation[i], cutoff=1/5))[1, ])
-    df$height[i] <- length(cutWhite(rotLetter(letter, cSize=100, angle=rotation[i], cutoff=1/5))[, 1])
+  # Create dataframe
+  df.angle <- data.frame(angle)
+  for(i in 1:length(angle)){
+    df.angle$width[i] <- length(cutWhite(rotLetter(letter, canvas_size=100, angle=angle[i], cutoff=1/5))[1, ])
+    df.angle$height[i] <- length(cutWhite(rotLetter(letter, canvas_size=100, angle=angle[i], cutoff=1/5))[1, ])
   }
   
   # min width
-  df$opt <- df$width
-  optRotation <- df$rotation[df$opt == min(df$opt)][1]
+  df.angle$opt <- df.angle$width
+  opt_rotation <- df.angle$angle[df.angle$opt == min(df.angle$opt)][1]
   
   # Rotate the letter
-  letter_temp <- cutWhite(rotLetter(letter, cSize=100, angle=optRotation, cutoff=1/5))
+  letter.tmp <- cutWhite(rotLetter(letter, canvas_size=100, angle=opt_rotation, cutoff=1/5))
   
   # Check if not a M or W
-  if(isMW(letter_temp)){
-    df <- data.frame(rotation)
+  if(isMW(letter.tmp)){
+    df.angle <- data.frame(angle)
     
-    for(i in 1:length(rotation)){
-      df$width[i] <- length(cutWhite(rotLetter(letter, cSize=100, angle=rotation[i], cutoff=1/5))[1, ])
-      df$height[i] <- length(cutWhite(rotLetter(letter, cSize=100, angle=rotation[i], cutoff=1/5))[, 1])
+    for(i in 1:length(angle)){
+      df.angle$width[i] <- length(cutWhite(rotLetter(letter, canvas_size=100, angle=angle[i], cutoff=1/5))[1, ])
+      df.angle$height[i] <- length(cutWhite(rotLetter(letter, canvas_size=100, angle=angle[i], cutoff=1/5))[, 1])
     }
     
     # max width
-    df$opt <- df$width
-    optRotation <- df$rotation[df$opt == max(df$opt)][1]
+    df.angle$opt <- df.angle$width
+    opt_rotation <- df.angle$angle[df.angle$opt == max(df.angle$opt)][1]
     
-    letter_temp <- cutWhite(rotLetter(letter, cSize=100, angle=optRotation, cutoff=1/5))
+    letter.tmp <- cutWhite(rotLetter(letter, canvas_size=100, angle=opt_rotation, cutoff=1/5))
   }
-  letter_temp
+  letter.tmp
 }
 
 #' @title Plot Letter on a canvas
@@ -307,27 +304,27 @@ rotationFun <- function(letter){
 #' @param letter
 #' @param canvas
 #' @param number
-#' @param widthLetter
+#' @param letter_width
 #' 
 
-plotLetters <- function(letter, canvas, number, widthLetter=30){
+plotLetters <- function(letter, canvas, number, letter_width=30){
   
   # Max. width and max. height of the letter
-  widthX <- length(letter[, 1])
-  heightY <- length(letter[1, ])
+  widthx <- length(letter[, 1])
+  heighty <- length(letter[1, ])
   
   # Zero coordinates of the canvas c(Y, X)
-  zeroY <- length(canvas[, 1])/2
-  zeroX <- 10 + (widthLetter * (number - 1))
+  zeroy <- length(canvas[, 1])/2
+  zerox <- 10 + (letter_width * (number - 1))
   
   # Plot the letter on the canvas
-  for(y in 1:heightY){
-    for(x in 1:widthX){
-      canvas[zeroY + (x - 1), zeroX + (y - 1)] <- letter[x, y]
+  for(y in 1:heighty){
+    for(x in 1:widthx){
+      canvas[zeroy + (x - 1), zerox + (y - 1)] <- letter[x, y]
     }
   } 
   
-  imagedata(canvas)
+  canvas
 }
 
 #' @title Rotate Letter randomly
@@ -339,7 +336,7 @@ plotLetters <- function(letter, canvas, number, widthLetter=30){
 #' 
 
 rotateAndCombine <- function(letter){
-  #require(biOps)
+  require(EBImage)
   
   ## Rotate, cut horizontal and vertical whitespace / get the width
   rotation <- seq(-55, 55, by=5)
@@ -351,7 +348,6 @@ rotateAndCombine <- function(letter){
   for(i in 1:length(rotation)){
     canvas <- plotLetters(cutWhite(rotLetter(letter, cSize=100, angle=rotation[i], cutoff=1/5)), canvas, number=i)
   }
-  
   
   canvas
 }
