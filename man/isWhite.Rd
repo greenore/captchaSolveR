@@ -3,13 +3,13 @@
 \alias{isWhite}
 \title{Find parts of an image that is white}
 \usage{
-isWhite(img, axes = "v")
+isWhite(img_data, axes = "v")
 }
 \arguments{
-\item{img}{A matrix of imagedata resulting from a readJpeg import.}
-
 \item{axes}{Either 'v' or 'h', is the image scaned trough vertically or
 horizontally.}
+
+\item{img}{A matrix of imagedata resulting from a readJpeg import.}
 }
 \description{
 \code{isWhite} is looking for the parts in an image that are

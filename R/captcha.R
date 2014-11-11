@@ -1,39 +1,47 @@
 # Captcha Functions
 #------------------
 
-#' @title Transforms an image to black & white
+#' @title Transforms an image to Greyscale
 #' @export
 #' 
-#' @description \code{img2Black} transforms a multilayered and multicolored 
-#' captcha into a black & white image. The values are (rgb = 0) for black and 
-#' (rbg = 255) for white.
+#' @description \code{img2Grey} transforms a multilayered and multicolored 
+#' Image into a Greyscale image. 
 #'  
-#' @param img A matrix of imagedata resulting from a readJpeg import.
+#' @param img An image resulting from a readImage import.
 #' 
 #' @examples
-#' captcha <- img2Black(captcha)
+#' captcha <- img2Grey(captcha)
 
-img2Black <- function(img){
-  #require(biOps)
-  
-  # make dark colors dark and light colors light
-  limit <- 150
-  img[img < limit] <- 0
-  img[img >= limit] <- 255
+img2Grey <- function(img){
+  require(EBImage)
   
   # Image to grey Scale
-  #img <- imgRGB2Grey(img)
+  img <- channel(img, "gray")
+  img
+}
+
+#' @title make dark colors dark and light colors light
+#' @export
+#' 
+#' @description \code{blackOrWhite} transforms a multilayered and multicolored 
+#' Image into a Greyscale image. 
+#'  
+#' @param img An image resulting from a readImage import.
+#' @param limit The color limit value [0, 1], where 0 is black and 1 is white. 
+
+blackOrWhite <- function(img, limit){
+  require(EBImage)
   
-  # make dark colors dark and light colors light
-  limit <- 200
-  img[img < limit] <- 0
-  img[img >= limit] <- 255
+  # Get image data
+  img_data <- imageData(img)
   
-  # Remove all inbetween shades
-  limit <- 0
-  img[img <= limit] <- 0
-  img[img > limit] <- 255
-  img  
+  # Change according to limit
+  img_data[img_data < limit] <- 0
+  img_data[img_data >= limit] <- 1
+  
+  # Output
+  imageData(img) <- img_data
+  img
 }
 
 #' @title Find parts of an image that is white
@@ -49,23 +57,26 @@ img2Black <- function(img){
 #' @examples
 #' whiteVector <- isWhite(letter, axes = 'h')
 
-isWhite <- function(img, axes = 'v'){
-  width <- length(img[1, ])
-  height <- length(img[, 1])
+isWhite <- function(img_data, axes = 'v'){
+  
+  # Length & Width
+  width <- length(img_data[1, ])
+  height <- length(img_data[, 1])
   
   dfWhite <- NULL
+  
   # Cut off vertically
   if(axes == 'v'){
     for(x in 1:width){
-      dfWhite[x] <- sum(img[, x] != 255)
-    }    
+      dfWhite[x] <- sum(img_data[, x] != 1)
+    }
   }
   
-  # Cut off horizontally  
+  # Cut off horizontally
   if(axes == 'h'){
     for(y in 1:height){
-      dfWhite[y] <- sum(img[y, ] != 255)
-    }    
+      dfWhite[y] <- sum(img_data[y, ] != 1)
+    }
   }
   
   dfWhite > 0
@@ -80,7 +91,7 @@ isWhite <- function(img, axes = 'v'){
 #' 
 
 cutWhite <- function(letter){
-  #require(biOps)
+  require(EBImage)
   
   # Length & Width
   width <- length(letter[1, ])
@@ -95,15 +106,10 @@ cutWhite <- function(letter){
   RM <- rleVerti$lengths[length(rleVerti$lengths)] - 1
   BM <- rleHoriz$lengths[length(rleHoriz$lengths)] - 1
   LM <- rleVerti$lengths[1]
-  rleHoriz$values[1] == F
-  
-  rleVerti
-  data.frame(letter)
-  letter[TM:(height - BM), LM:(width - RM)]
   
   # cutting according to css box model
   letter <- letter[TM:(height - BM), LM:(width - RM)]
-  imagedata(letter)
+  letter
 }
 
 #' @title Seperate letters
@@ -116,12 +122,18 @@ cutWhite <- function(letter){
 #' 
 
 sepLetter <- function(img, nLetter){
+  require(EBImage)
   
-  width <- length(img[1, ])
-  height <- length(img[, 1])
+  # Get image data
+  img_data <- imageData(img)
+  img_data <- transpose(img_data)
+  
+  # Length & Width
+  width <- length(img_data[1, ])
+  height <- length(img_data[, 1])
   
   # Run length encoding
-  rleVerti <- rle(isWhite(img, axes = 'v'))
+  rleVerti <- rle(isWhite(img_data, axes = 'v'))
   rleVerti$cumsum <- cumsum(rleVerti$lengths)
   
   # x Coordinates left and right side
@@ -129,9 +141,14 @@ sepLetter <- function(img, nLetter){
   xRight <- rleVerti$cumsum[rleVerti$values == T] + 1
   
   # Cut letter
-  letter <- img[, xLeft[nLetter]:xRight[nLetter]]
-  imagedata(cutWhite(letter))
-}  
+  letter <- img_data[, xLeft[nLetter]:xRight[nLetter]]
+  letter <- cutWhite(letter)
+  
+  # Change direction
+  letter <- transpose(letter)
+  
+  letter
+}
 
 #' @title Creat a Canvas
 #' @export
