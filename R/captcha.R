@@ -23,13 +23,13 @@ img2Grey <- function(img){
 #' @title Makes dark colors black and light colors white, i.e. sharpens the colors
 #' @export
 #' 
-#' @description \code{sharpenImg} transforms a multilayered and multicolored 
+#' @description \code{sharperImage} transforms a multilayered and multicolored 
 #' Image into a Greyscale image. 
 #'  
 #' @param img An image resulting from a readImage import.
 #' @param limit The color limit value [0, 1], where 0 is black and 1 is white. 
 
-sharpenImg <- function(img, limit){
+sharperImage <- function(img, limit){
   require(EBImage)
   
   # Get image data
