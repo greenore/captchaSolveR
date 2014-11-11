@@ -351,6 +351,5 @@ rotateAndCombine <- function(letter, angle, nrows=80, ncols=800){
   }
   
   canvas <- transpose(canvas)
-  canvas <- cutWhite(canvas)
   canvas
 }
