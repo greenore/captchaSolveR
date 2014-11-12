@@ -15,6 +15,7 @@ Imports:
     XML,
     EBImage,
     ocR,
+    systemR,
     methods
 Roxygen: list(wrap = FALSE)
 License: file LICENSE
