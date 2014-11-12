@@ -11,7 +11,7 @@ Installing packages directly from Github is easiest with the «[devtools][1]» p
 
 ```
 source("https://rawgit.com/greenore/initR/master/init.R")
-packagesGithub(captchaSolveR, repo_name="greenore")
+packagesGithub("captchaSolveR", repo_name="greenore")
 packagesBioconductor("EBImage")
 ```
 
