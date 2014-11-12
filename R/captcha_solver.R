@@ -373,7 +373,7 @@ countChar <- function(input_string, char_universe=letters){
 #'  
 
 chooseChar <- function(char_count){
-  major_char <- names(char_count)[count == max(char_count)]
+  major_char <- names(char_count)[char_count == max(char_count)]
   
   if(length(major_char) > 1){
     message(paste0("WARNING: Multiple characters: ", paste0(major_char, collapse = " ")))
