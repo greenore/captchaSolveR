@@ -360,7 +360,27 @@ rotateAndCombine <- function(letter, angle, nrows=80, ncols=800){
 #' 
 
 countChar <- function(input_string, char_universe=letters){
-  count <- sapply(char_universe, function(x){x <- sum(x == unlist(strsplit(input_string, "")))})
-  count  
+  char_count <- sapply(char_universe, function(x){x <- sum(x == unlist(strsplit(input_string, "")))})
+  char_count  
+}
+
+#' @title Choose character with the most occurances
+#' @export
+#' 
+#' @description \code{chooseChar} 
+#'  
+#' @param char_count input string
+#'  
+
+chooseChar <- function(char_count){
+  major_char <- names(char_count)[count == max(char_count)]
+  
+  if(length(major_char) > 1){
+    message(paste0("WARNING: Multiple characters: ", paste0(major_char, collapse = " ")))
+    major_char <- sample(major_char, 1)
+    message(paste0("Randomly selected: ", major_char))
+  }
+  
+  major_char
 }
 
