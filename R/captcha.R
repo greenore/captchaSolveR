@@ -57,29 +57,27 @@ sharpenImage <- function(img, limit){
 #' @examples
 #' whiteVector <- isWhite(letter, axes='h')
 
-isWhite <- function(img_data, axes='v'){
+isWhite <- function(img, axes='v'){
+  require(EBImage)
+  
+  # Get image data
+  img_data <- imageData(img)
   
   # Length & Width
   width <- length(img_data[1, ])
   height <- length(img_data[, 1])
-  
-  dfWhite <- NULL
-  
+
   # Cut off vertically
   if(axes == 'v'){
-    for(x in 1:width){
-      dfWhite[x] <- sum(img_data[, x] != 1)
-    }
+    white <- colSums(img_data < 1)
   }
   
   # Cut off horizontally
   if(axes == 'h'){
-    for(y in 1:height){
-      dfWhite[y] <- sum(img_data[y, ] != 1)
-    }
+    white <- rowSums(img_data < 1)
   }
   
-  dfWhite > 0
+  white > 0
 }
 
 #' @title Cut-off whitespace (with 1px left)
