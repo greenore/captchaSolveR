@@ -7,14 +7,16 @@ captchaSolveR
 
 ### Install 
 
-Installing directly from Github requires some helper packages. The easies way to setup **captchaSolveR** is to source the following «[init.R][1]» script and then install and run the package with the packagesGithub function. Furthermore, In order to read as well as solve captcha images, **captchaSolveR** heavily relies on the «[EBImage][2]» package and also utilizes some functions from the «[systemR][3] package». The package is not on CRAN and has to be installed directly from Bioconductor. Running the following lines of code installs and loads everything for captchaSolveR to work:
+Installing directly from Github requires some helper packages. The easies way to setup **captchaSolveR** is to source the following «[init.R][1]» script and then install and run the package with the packagesGithub function. Furthermore, In order to read as well as solve captcha images, **captchaSolveR** heavily relies on the «[EBImage][2]» package and also utilizes some functions from the «[systemR][3]» and «[ocR][4]» package. The package is not on CRAN and has to be installed directly from Bioconductor. Running the following lines of code installs and loads everything for captchaSolveR to work:
 
 ```
 source("https://rawgit.com/greenore/initR/master/init.R")
 packagesBioconductor("EBImage")
-packagesGithub(c("systemR", "captchaSolveR"), repo_name="greenore")
+packagesGithub(c("systemR", "ocR", "captchaSolveR"), repo_name="greenore")
 ```
 
 [1]: https://github.com/greenore/initR/blob/master/init.R
 [2]: http://www.bioconductor.org/packages/release/bioc/html/EBImage.html
 [3]: https://github.com/greenore/systemR
+[4]: https://github.com/greenore/ocR
+
