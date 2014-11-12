@@ -7,18 +7,14 @@ captchaSolveR
 
 ### Install 
 
-To install captchaSolveR from Github requires the devtools package from CRAN. That means running the following commands:
-
-```
-install.packages("devtools")
-devtools::install_github(repo="greenore/captchaSolveR")
-```
-### Dependency
-
-In order to read as well as solve captcha images, **captchaSolveR** utilizes heavily the «[EBImage][1]» package. To install and load it, you can use the following functions:
+Installing packages directly from Github is easiest with the «[devtools][1]» package. Furthermore, In order to read as well as solve captcha images, **captchaSolveR** heavily relies on the «[EBImage][2]» package. The following functions install and load all the necessary packages: 
 
 ```
 source("https://rawgit.com/greenore/initR/master/init.R")
+packagesGithub(captchaSolveR, repo_name="greenore")
 packagesBioconductor("EBImage")
 rm(list = ls())
 ```
+
+[1]: http://cran.r-project.org/web/packages/devtools/index.html
+[2]: http://cran.r-project.org/bin/windows/Rtools/
