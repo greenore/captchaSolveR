@@ -267,9 +267,9 @@ angleRotation <- function(letter, angle){
     df.angle$height[i] <- length(cutWhite(rotLetter(letter, canvas_size=100, angle=angle[i], cutoff=1/5))[1, ])
   }
   
-  # max width
+  # min width
   df.angle$opt <- df.angle$width
-  opt_rotation <- df.angle$angle[df.angle$opt == max(df.angle$opt)][1]
+  opt_rotation <- df.angle$angle[df.angle$opt == min(df.angle$opt)][1]
   
   # Rotate the letter
   letter.tmp <- cutWhite(rotLetter(letter, canvas_size=100, angle=opt_rotation, cutoff=1/5))
@@ -283,9 +283,9 @@ angleRotation <- function(letter, angle){
       df.angle$height[i] <- length(cutWhite(rotLetter(letter, canvas_size=100, angle=angle[i], cutoff=1/5))[, 1])
     }
     
-    # min width
+    # max width
     df.angle$opt <- df.angle$width
-    opt_rotation <- df.angle$angle[df.angle$opt == min(df.angle$opt)][1]
+    opt_rotation <- df.angle$angle[df.angle$opt == max(df.angle$opt)][1]
     
     letter.tmp <- cutWhite(rotLetter(letter, canvas_size=100, angle=opt_rotation, cutoff=1/5))
   }
