@@ -14,5 +14,5 @@ In order to replicate the analysis, the steps in the «[00_main.R][3]» script h
 Author: Tim Hagmann
 
 [1]: https://github.com/greenore/captchaSolveR/tree/master/demo
-[2]: https://github.com/greenore/captchaSolveR/tree/master/data/captcha]
+[2]: https://github.com/greenore/captchaSolveR/tree/master/data/captcha
 [3]: https://github.com/greenore/captchaSolveR/tree/master/demo/00_main.R
