@@ -16,7 +16,7 @@ packagesBioconductor("EBImage")
 packagesGithub(c("systemR", "ocR", "captchaSolveR"), repo_name="greenore")
 ```
 
-#### Unix like systems:
+#### Linux:
 ```
 source(pipe(paste("wget -O -", "https://rawgit.com/greenore/initR/master/init.R")))
 packagesBioconductor("EBImage")
