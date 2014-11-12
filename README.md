@@ -13,7 +13,6 @@ Installing packages directly from Github is easiest with the «[devtools][1]» p
 source("https://rawgit.com/greenore/initR/master/init.R")
 packagesGithub(captchaSolveR, repo_name="greenore")
 packagesBioconductor("EBImage")
-rm(list = ls())
 ```
 
 [1]: http://cran.r-project.org/web/packages/devtools/index.html
