@@ -3,8 +3,8 @@
 postCaptcha <- function(url, user, pass, path){
   require(RCurl)
   
-  result <- postForm(url, username = user, password = pass,
-                     captchafile = fileUpload(filename = path, contentType = 'image/jpg'))
+  result <- postForm(url, username=user, password=pass,
+                     captchafile=fileUpload(filename=path, contentType='image/jpg'))
   result
 }
 
@@ -13,8 +13,8 @@ postCaptcha <- function(url, user, pass, path){
 getCaptcha <- function(url, id){
   require(RCurl)
   
-  url <- paste(url, '/', sep = '')
-  url <- paste(url, id, sep = '')
+  url <- paste(url, '/', sep='')
+  url <- paste(url, id, sep='')
   
   result <- getURL(url)
   result
@@ -25,10 +25,10 @@ getCaptcha <- function(url, id){
 reportCaptcha <- function(url, user, pass){
   require(RCurl)
   
-  url <- paste(url, '/', sep = '')
-  url <- paste(url, id, sep = '')
-  url <- paste(url, '/report', sep = '')
+  url <- paste(url, '/', sep='')
+  url <- paste(url, id, sep='')
+  url <- paste(url, '/report', sep='')
   
-  result <- postForm(url, username = user, password = pass)
+  result <- postForm(url, username=user, password=pass)
   result
 }
