@@ -2,6 +2,7 @@
 # Purpose:         Solve Captcha Codes
 # Date:            2014-11-13
 # Author:          Tim Hagmann
+# Notes:           In order for it to work, Tesseract has to be installed.
 # R Version:       R version 3.1.2 -- "Pumpkin Helmet"
 ################################################################################
 
