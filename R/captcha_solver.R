@@ -148,27 +148,6 @@ sepLetter <- function(img, letter_num){
   letter
 }
 
-#' @title Seperate multiple letters
-#' @export
-#' 
-#' @description \code{sepLetters} 
-#'  
-#' @param img 
-#' @param num_letters Total number of letters to extract
-#' 
-
-sepLetters <- function(img, num_letters=6){
-  ls.letters <- list()
-  
-  for(i in 1:num_letters){
-    var <- paste0("letter", i)
-    ls.letters[[var]] <- sepLetter(img, letter_num=i)
-  }
-  
-  ls.letters
-}
-
-
 #' @title Creat a Canvas
 #' @export
 #' 
