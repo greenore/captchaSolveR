@@ -349,3 +349,18 @@ rotateAndCombine <- function(letter, angle, nrows=80, ncols=800){
   canvas <- transpose(canvas)
   canvas
 }
+
+#' @title Count number of characters
+#' @export
+#' 
+#' @description \code{countChar} 
+#'  
+#' @param input_string input string
+#' @param char_universe Possible set of characters
+#' 
+
+countChar <- function(input_string, char_universe=letters){
+  count <- sapply(char_universe, function(x){x <- sum(x == unlist(strsplit(input_string, "")))})
+  count  
+}
+
