@@ -24,7 +24,7 @@ The first part is to Sharpen image and subtract color, i.e., make it black and w
 
 After that the letters can be seperated, rotated, and combinend so that they can be put trough the tesseract ocr engine. With a simple majoritiy voting the most likely letter is then determined.
 
-![](https://cdn.rawgit.com/greenore/captchaSolveR/master/data/captcha/captcha_letter1.jpeg "Captcha_Letter1")
+![](https://cdn.rawgit.com/greenore/captchaSolveR/master/data/captcha/captcha_letter1.jpeg "Captcha_Letter5")
 
 Author: Tim Hagmann
 
