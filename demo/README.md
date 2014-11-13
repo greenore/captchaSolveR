@@ -14,7 +14,7 @@ In order to replicate the analysis, the steps in the «[00_main.R][3]» script h
 ## The idea
 In this example we are going to use captcha like the following images.
 
-![](https://github.com/greenore/captchaSolveR/tree/master/data/captcha/captcha1.jpg "image1")
+![alt text](https://github.com/greenore/captchaSolveR/tree/master/data/captcha/captcha1.jpg "Captcha1")
 
 It's easy to observe the followings. First of all, a fixed size (monospace) font has been used. This makes extracting all the letters and using them as masks to check each digit, one by one, very easy. Also, the alphabet is simple lowercase hexadecimal letters.
 
